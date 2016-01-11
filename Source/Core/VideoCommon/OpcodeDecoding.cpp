@@ -158,6 +158,12 @@ u8* OpcodeDecoder_Run(DataReader src, u32* cycles, bool in_display_list)
 			DEBUG_LOG(VIDEO, "GX Reset?: %08x", cmd_byte);
 			break;
 
+		case GX_UNKNOWN_WIGGLER_1:
+		case GX_UNKNOWN_WIGGLER_2:
+			totalCycles += 6; // Mario Party 5 uses these two commands when animating the Wiggler.
+			DEBUG_LOG(VIDEO, "Mario Party 5 Wiggler workaround? opcode: %08x", cmd_byte);
+			break;
+
 		case GX_LOAD_CP_REG:
 			{
 				if (src.size() < 1 + 4)
